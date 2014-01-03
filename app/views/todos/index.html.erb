@@ -1,12 +1,10 @@
-<h1>Listing todos</h1>
+<h1>Current Todos</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
-      <th>Due</th>
-      <th></th>
-      <th></th>
+      <th>Due in</th>
       <th></th>
     </tr>
   </thead>
@@ -15,15 +13,17 @@
     <% @todos.each do |todo| %>
       <tr>
         <td><%= todo.name %></td>
-        <td><%= todo.due %></td>
-        <td><%= link_to 'Show', todo %></td>
-        <td><%= link_to 'Edit', edit_todo_path(todo) %></td>
-        <td><%= link_to 'Destroy', todo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= pluralize((todo.due.mjd - Date.today.mjd), "day") %></td>
+        <td>
+            <div class="btn-group pull-right">
+                <%= link_to 'View', todo, :class => "btn btn-default" %>
+                <%= link_to "Edit", edit_todo_path(todo), :class => "btn btn-default" %>
+                <%= link_to "Delete", todo, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
+            </div>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Todo', new_todo_path %>
+<%= link_to 'New Todo', new_todo_path, :class => "btn btn-primary" %>
