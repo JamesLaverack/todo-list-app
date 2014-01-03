@@ -53,3 +53,5 @@ end
 # gem 'debugger', group: [:development, :test]
 
 ruby "2.1.0"
+
+gem 'rails_12factor', group: :production
